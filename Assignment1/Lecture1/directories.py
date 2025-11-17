@@ -16,8 +16,7 @@ def print_files(dir_path):
 def is_hidden(entry):
     if entry.name.startswith('.') or entry.name.startswith('_'):
         return True
-    else:
-        return False
+    return False
 
 
 dir_path = input('Enter directory (leave blank for cwd): ')
