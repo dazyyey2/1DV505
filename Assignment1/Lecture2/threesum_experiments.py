@@ -25,7 +25,6 @@ def measure_threesum(algorithm, start, size, increment, plot=True):
             elapsed = time.time() - before
             track[sz] = elapsed
             print(f'{sz} : {round(track[sz], 3)}')
-        # Create graph with runs
         if i == 0:
             for key in track.keys():
                 run1[key] = track[key]
@@ -56,6 +55,7 @@ def measure_threesum(algorithm, start, size, increment, plot=True):
     logY = [math.log(y) for y in averages.values()]
     m, k = algo.lin_reg(logX, logY)
     lineY = [m + k * x for x in logX]
+    print(f'Estimated time complexity: O(n^{round(k)})')
     if plot:
         # Create and show graph with runs
         ax = algo.create_graph(run1.keys(), run1.values(),
@@ -152,6 +152,6 @@ match user_input:
                         f'Pointer (P) K value: {k_p}\n'
                         f'Estimated time complexity: O(n^{round(k_p)})\n'
                         f'Cache (C) K value: {k_c}\n'
-                        f'Estimated time complexity: O(n^{round(k_p)})',
+                        f'Estimated time complexity: O(n^{round(k_c)})',
                         'Logarithm of list sizes',
                         'Logarithm of run times', True)

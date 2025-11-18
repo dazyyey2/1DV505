@@ -2,7 +2,7 @@ import random
 import matplotlib.pyplot as plt
 
 
-def threesum_brute(lst, target=0):
+def threesum_brute(lst, sum=0):
     unique_triples = set()
     for i in range(len(lst)-1):
         v1 = lst[i]
@@ -10,7 +10,7 @@ def threesum_brute(lst, target=0):
             v2 = lst[z]
             for j in range(z+1, len(lst)):
                 v3 = lst[j]
-                if v1 + v2 + v3 == target:
+                if v1 + v2 + v3 == sum:
                     # Sort tuple before adding to set
                     triple = tuple(sorted((v1, v2, v3)))
                     unique_triples.add(triple)
