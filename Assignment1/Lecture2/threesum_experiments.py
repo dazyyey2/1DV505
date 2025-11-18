@@ -5,7 +5,7 @@ import time
 import sys
 sys.path.append("./Utils/")
 import utils  # type: ignore # noqa: E402
-# Comments on above line are to remove errors linters
+# Comments on above line are to remove error from linters
 
 
 def measure_threesum(algorithm, start, size, increment, plot=True):
