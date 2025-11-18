@@ -11,35 +11,33 @@ def measure_threesum(algorithm, start, size, increment, plot=True):
     run3 = {}
     ax = None
     for i in range(0, 3):  # Run 3 times
-        track.clear()
+        track.clear()  # Clear time tracking data
         print(f'======= RUN {i+1} =======')
         for sz in range(start, size, increment):
+            # Generate list of random values of size sz
             lst = algo.random_list(sz, 10)
-            before = time.time()
+            before = time.time()  # Save time before operation
+            # Choose algorithm to use in operation
             if algorithm == 'brute':
                 algo.threesum_brute(lst)
             elif algorithm == 'pointers':
                 algo.threesum_pointers(lst)
             elif algorithm == 'caching':
                 algo.threesum_caching(lst)
+            # Calculate time elapsed since before operation
             elapsed = time.time() - before
-            track[sz] = elapsed
+            track[sz] = elapsed  # Save time and size of list
             print(f'{sz} : {round(track[sz], 3)}')
+        # Save run data
         if i == 0:
             for key in track.keys():
                 run1[key] = track[key]
-            # ax = algo.create_graph(track.keys(), track.values(),
-            #                        ax=ax, figure='bo', legend_label='Run 1')
         elif i == 1:
             for key in track.keys():
                 run2[key] = track[key]
-            # ax = algo.create_graph(track.keys(), track.values(),
-            #                        ax=ax, figure='g*', legend_label='Run 2')
         elif i == 2:
             for key in track.keys():
                 run3[key] = track[key]
-            # ax = algo.create_graph(track.keys(), track.values(),
-            #                        ax=ax, figure='r+', legend_label='Run 3')
         # Sum the time of runs in new dict
         for j in track:
             if j in sum_of_times:
@@ -86,6 +84,7 @@ def measure_threesum(algorithm, start, size, increment, plot=True):
 
 
 n = 15  # List size
+# Print use of algorithms and list
 list1 = algo.random_list(n, 10)
 print(f'list1: {list1}')
 print(f'Using Brute: {algo.threesum_brute(list1)}')
@@ -104,8 +103,10 @@ print(f'Using Caching: {algo.threesum_caching(list3)}')
 print('\n1. Brute')
 print('2. Pointers')
 print('3. Caching')
-print('4. Compare pointer and caching algorithms')
+print('4. Compare pointer and caching algorithms\n')
 user_input = input('Please make a selection: ')
+print()
+# Find what the user wants to do
 match user_input:
     case '1':
         measure_threesum('brute', 250, 951, 50)
@@ -114,9 +115,11 @@ match user_input:
     case '3':
         measure_threesum('caching', 1500, 12501, 1000)
     case '4':
+        # Get data from pointers algorithm and save it for comparison
         run1_p, run2_p, run3_p, logX_p, logY_p, lineY_p, k_p = (
             measure_threesum('pointers', 1500, 12501, 1000, plot=False)
             )
+        # Get data from caching algorithm and save it for comparison
         run1_c, run2_c, run3_c, logX_c, logY_c, lineY_c, k_c = (
             measure_threesum('caching', 1500, 12501, 1000, plot=False)
             )
@@ -138,7 +141,8 @@ match user_input:
                         ' algorithms\n(P): Pointer\n(C): Caching',
                         f'List sizes in range 100 to {12501}',
                         'Run times with random lists', True)
-        # Create and show comparison log graph with k values
+        # Create and show comparison log vs log graph with k values and
+        # estimated time complexity
         log_graph = algo.create_graph(logX_p, lineY_p, None, None,
                                       'Straight line fit (P)')
         log_graph = algo.create_graph(logX_p, logY_p, log_graph, 'r+',
