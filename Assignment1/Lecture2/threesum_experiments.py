@@ -1,9 +1,11 @@
+# Remove below line if flake8 is wanted
+# flake8: noqa
 import math
 import threesum_algs as algo
 import time
 import sys
 sys.path.append("./Utils/")  # Import from Utils folder
-import utils  # Ignore Flake8 error
+import utils  # Reason for top comment
 
 
 def measure_threesum(algorithm, start, size, increment, plot=True):
