@@ -84,7 +84,7 @@ def show_graph(ax, title, xlabel, ylabel, legend):
 
 def create_graph(labels, sizes, ax, figure, legend_label):
     if ax is None:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(12, 8))
     labels = list(labels)
     sizes = list(sizes)
     if figure is None:
