@@ -1,6 +1,9 @@
 import math
-import threesum as algo
+import threesum_algs as algo
 import time
+import sys
+sys.path.append("./Utils/")  # Import from Utils folder
+import utils  # Ignore Flake8 error
 
 
 def measure_threesum(algorithm, start, size, increment, plot=True):
@@ -15,7 +18,7 @@ def measure_threesum(algorithm, start, size, increment, plot=True):
         print(f'======= RUN {i+1} =======')
         for sz in range(start, size, increment):
             # Generate list of random values of size sz
-            lst = algo.random_list(sz, 10)
+            lst = utils.random_list(sz, 10)
             before = time.time()  # Save time before operation
             # Choose algorithm to use in operation
             if algorithm == 'brute':
@@ -48,54 +51,54 @@ def measure_threesum(algorithm, start, size, increment, plot=True):
     averages = {}
     for value in sum_of_times.keys():
         averages[value] = sum_of_times[value] / 3
-    # Calculate log v log graph
+    # Calculate log-log graph
     logX = [math.log(x) for x in averages.keys()]
     logY = [math.log(y) for y in averages.values()]
-    m, k = algo.lin_reg(logX, logY)
+    m, k = utils.lin_reg(logX, logY)
     lineY = [m + k * x for x in logX]
     print(f'Estimated time complexity: O(n^{round(k)})')
     if plot:
         # Create and show graph with runs
-        ax = algo.create_graph(run1.keys(), run1.values(),
-                               ax=ax, figure='bo', legend_label='Run 1')
-        ax = algo.create_graph(run2.keys(), run2.values(),
-                               ax=ax, figure='g*', legend_label='Run 2')
-        ax = algo.create_graph(run3.keys(), run3.values(),
-                               ax=ax, figure='r+', legend_label='Run 3')
-        algo.show_graph(ax, '3 runs for 3-sum',
-                        f'List sizes in range 100 to {size}',
-                        'Run times with random lists', True)
+        ax = utils.create_graph(run1.keys(), run1.values(),
+                                ax=ax, figure='bo', legend_label='Run 1')
+        ax = utils.create_graph(run2.keys(), run2.values(),
+                                ax=ax, figure='g*', legend_label='Run 2')
+        ax = utils.create_graph(run3.keys(), run3.values(),
+                                ax=ax, figure='r+', legend_label='Run 3')
+        utils.show_graph(ax, '3 runs for 3-sum',
+                         f'List sizes in range 100 to {size}',
+                         'Run times with random lists', True)
         # Create and show averages graph
-        line_graph = algo.create_graph(averages.keys(), averages.values(),
-                                       None, None, '')
-        algo.show_graph(line_graph, 'Average values for 3-sum',
-                        f'List sizes in range 100 to {size}',
-                        'Run times with random lists', False)
+        line_graph = utils.create_graph(averages.keys(), averages.values(),
+                                        None, None, '')
+        utils.show_graph(line_graph, 'Average values for 3-sum',
+                         f'List sizes in range 100 to {size}',
+                         'Run times with random lists', False)
         # Create and show log graph
-        log_graph = algo.create_graph(logX, lineY, None, None,
-                                      'Straight line fit')
-        log_graph = algo.create_graph(logX, logY, log_graph, 'r+', 'Log data')
-        algo.show_graph(log_graph,
-                        f'Log vs Log and a straight line fit with k = {k}\n'
-                        f'Estimated time complexity: O(n^{round(k)})',
-                        'Logarithm of list sizes',
-                        'Logarithm of run times', True)
+        log_graph = utils.create_graph(logX, lineY, None, None,
+                                       'Straight line fit')
+        log_graph = utils.create_graph(logX, logY, log_graph, 'r+', 'Log data')
+        utils.show_graph(log_graph,
+                         f'Log-log and a straight line fit with k = {k}\n'
+                         f'Estimated time complexity: O(n^{round(k)})',
+                         'Logarithm of list sizes',
+                         'Logarithm of run times', True)
     return run1, run2, run3, logX, logY, lineY, k
 
 
 n = 15  # List size
 # Print use of algorithms and list
-list1 = algo.random_list(n, 10)
+list1 = utils.random_list(n, 10)
 print(f'list1: {list1}')
 print(f'Using Brute: {algo.threesum_brute(list1)}')
 print(f'Using Pointers: {algo.threesum_pointers(list1)}')
 print(f'Using Caching: {algo.threesum_caching(list1)}')
-list2 = algo.random_list(n, 10)
+list2 = utils.random_list(n, 10)
 print(f'\nlist2: {list2}')
 print(f'Using Brute: {algo.threesum_brute(list2)}')
 print(f'Using Pointers: {algo.threesum_pointers(list2)}')
 print(f'Using Caching: {algo.threesum_caching(list2)}')
-list3 = algo.random_list(n, 10)
+list3 = utils.random_list(n, 10)
 print(f'\nlist3: {list3}')
 print(f'Using Brute: {algo.threesum_brute(list3)}')
 print(f'Using Pointers: {algo.threesum_pointers(list3)}')
@@ -124,38 +127,38 @@ match user_input:
             measure_threesum('caching', 1500, 12501, 1000, plot=False)
             )
         # Create and show comparison run graph
-        ax = algo.create_graph(run1_p.keys(), run1_p.values(),
-                               ax=None, figure=None, legend_label='Run 1(P)')
-        ax = algo.create_graph(run2_p.keys(), run2_p.values(),
-                               ax=ax, figure=None, legend_label='Run 2(P)')
-        ax = algo.create_graph(run3_p.keys(), run3_p.values(),
-                               ax=ax, figure=None, legend_label='Run 3(P)')
-        ax = algo.create_graph(run1_c.keys(), run1_c.values(),
-                               ax=ax, figure=None, legend_label='Run 1(C)')
-        ax = algo.create_graph(run2_c.keys(), run2_c.values(),
-                               ax=ax, figure=None, legend_label='Run 2(C)')
-        ax = algo.create_graph(run3_c.keys(), run3_c.values(),
-                               ax=ax, figure=None, legend_label='Run 3(C)')
-        algo.show_graph(ax,
-                        'Comparison graph between pointer and caching'
-                        ' algorithms\n(P): Pointer\n(C): Caching',
-                        f'List sizes in range 100 to {12501}',
-                        'Run times with random lists', True)
-        # Create and show comparison log vs log graph with k values and
+        ax = utils.create_graph(run1_p.keys(), run1_p.values(),
+                                ax=None, figure=None, legend_label='Run 1(P)')
+        ax = utils.create_graph(run2_p.keys(), run2_p.values(),
+                                ax=ax, figure=None, legend_label='Run 2(P)')
+        ax = utils.create_graph(run3_p.keys(), run3_p.values(),
+                                ax=ax, figure=None, legend_label='Run 3(P)')
+        ax = utils.create_graph(run1_c.keys(), run1_c.values(),
+                                ax=ax, figure=None, legend_label='Run 1(C)')
+        ax = utils.create_graph(run2_c.keys(), run2_c.values(),
+                                ax=ax, figure=None, legend_label='Run 2(C)')
+        ax = utils.create_graph(run3_c.keys(), run3_c.values(),
+                                ax=ax, figure=None, legend_label='Run 3(C)')
+        utils.show_graph(ax,
+                         'Comparison graph between pointer and caching'
+                         ' algorithms\n(P): Pointer\n(C): Caching',
+                         f'List sizes in range 100 to {12501}',
+                         'Run times with random lists', True)
+        # Create and show comparison log-log graph with k values and
         # estimated time complexity
-        log_graph = algo.create_graph(logX_p, lineY_p, None, None,
-                                      'Straight line fit (P)')
-        log_graph = algo.create_graph(logX_p, logY_p, log_graph, 'r+',
-                                      'Log data (P)')
-        log_graph = algo.create_graph(logX_c, lineY_c, log_graph, None,
-                                      'Straight line fit (C)')
-        log_graph = algo.create_graph(logX_c, logY_c, log_graph, 'g*',
-                                      'Log data (C)')
-        algo.show_graph(log_graph,
-                        'Log vs Log and a straight line fit comparison\n'
-                        f'Pointer (P) K value: {k_p}\n'
-                        f'Estimated time complexity: O(n^{round(k_p)})\n'
-                        f'Cache (C) K value: {k_c}\n'
-                        f'Estimated time complexity: O(n^{round(k_c)})',
-                        'Logarithm of list sizes',
-                        'Logarithm of run times', True)
+        log_graph = utils.create_graph(logX_p, lineY_p, None, None,
+                                       'Straight line fit (P)')
+        log_graph = utils.create_graph(logX_p, logY_p, log_graph, 'r+',
+                                       'Log data (P)')
+        log_graph = utils.create_graph(logX_c, lineY_c, log_graph, None,
+                                       'Straight line fit (C)')
+        log_graph = utils.create_graph(logX_c, logY_c, log_graph, 'g*',
+                                       'Log data (C)')
+        utils.show_graph(log_graph,
+                         'Log-log and a straight line fit comparison\n'
+                         f'Pointer (P) K value: {k_p}\n'
+                         f'Estimated time complexity: O(n^{round(k_p)})\n'
+                         f'Cache (C) K value: {k_c}\n'
+                         f'Estimated time complexity: O(n^{round(k_c)})',
+                         'Logarithm of list sizes',
+                         'Logarithm of run times', True)
