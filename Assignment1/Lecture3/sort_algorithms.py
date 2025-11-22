@@ -138,11 +138,11 @@ def quick_sort_median(lst):
 
 def partition_median(lst):
     first_index = 0
-    mid_index = len(lst) // 2
-    last_index = len(lst) - 1
-    first_val = lst[first_index]
-    mid_val = lst[mid_index]
-    last_val = lst[last_index]
+    mid_index = len(lst) // 2  # Index of the middle
+    last_index = len(lst) - 1  # Index at the end
+    first_val = lst[first_index]  # Value at index 0
+    mid_val = lst[mid_index]  # Value in the middle
+    last_val = lst[last_index]  # Value at the end
     # Find median
     if (mid_val <= first_val <= last_val) or (last_val <=
                                               first_val <= mid_val):
@@ -155,11 +155,14 @@ def partition_median(lst):
     pivot = lst[pivot_index]  # Use median as pivot
     left = []
     right = []
+    # Go through list
     for i in range(0, len(lst)):
         # Skip the pivot
         if i != pivot_index:
+            # If value smaller or equal to pivot put it in the left list
             if lst[i] <= pivot:
                 left.append(lst[i])
+            # If value larger than pivot, put it in the right list
             else:
                 right.append(lst[i])
     return pivot, left, right
