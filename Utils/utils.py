@@ -30,9 +30,12 @@ def show_graph(ax, title, xlabel, ylabel, legend):
     plt.show()  # Show graph
 
 
-def create_graph(labels, sizes, ax, figure, legend_label):
+def create_graph(labels, sizes, ax, figure, legend_label, large=False):
     if ax is None:  # If no axis is given, create a new one
-        fig, ax = plt.subplots(figsize=(12, 8))
+        if not large:
+            fig, ax = plt.subplots(figsize=(12, 8))
+        else:
+            fig, ax = plt.subplots(figsize=(12, 12))
     labels = list(labels)
     sizes = list(sizes)
     if figure is None:  # If no figure is given, create line graph
