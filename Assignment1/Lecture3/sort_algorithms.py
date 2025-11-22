@@ -56,11 +56,70 @@ def insertion_sort(lst):
 
 
 def merge_sort(lst):
-    return lst
+    if lst == []:  # Handle empty list
+        return lst
+    if len(lst) == 1:  # Handle list with 1 element / base case
+        return lst
+    mid = len(lst) // 2  # Get middle with interger division
+    left = lst[:mid]  # Get left part from slicing
+    right = lst[mid:]  # Get right part from slicing
+    # Recursion step, keep splitting list into smaller parts
+    sorted_left = merge_sort(left)
+    sorted_right = merge_sort(right)
+    # After list has been split fully, merge it and return merged list
+    return merge(sorted_left, sorted_right)
+
+
+def merge(left, right):
+    result = []
+    i = 0  # Track left position in list
+    j = 0  # Track right position in list
+    # While we still have values to go through on left and right
+    while i < len(left) and j < len(right):
+        # Compare left and right value at index to find the smallest
+        # And then increment index from the side the value came from
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    # If list had more on left or right side, put remaining into result
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    return result
 
 
 def quick_sort_slow(lst):
-    return
+    if len(lst) <= 1:  # Base case
+        return lst
+    else:
+        # If list is larger than base case, get pivot and all values smaller
+        # in left and all values larger in right
+        pivot, left, right = partition_slow(lst)
+        # Recursion step, keep using last value as pivot until
+        # the whole list has been sorted
+        sorted_left = quick_sort_slow(left)
+        sorted_right = quick_sort_slow(right)
+        return sorted_left + [pivot] + sorted_right
+
+
+def partition_slow(lst):
+    pivot = lst[len(lst)-1]  # Use last value as pivot
+    left = []
+    right = []
+    # Go through the list (except pivot) and add any value larger
+    # to the right list and any value smaller or equal to the left list
+    for i in range(0, len(lst)-1):
+        if lst[i] <= pivot:
+            left.append(lst[i])
+        else:
+            right.append(lst[i])
+    return pivot, left, right
 
 
 def quick_sort_optimized(lst):
