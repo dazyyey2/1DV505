@@ -1,11 +1,10 @@
-# Remove below line if flake8 is wanted
 import math
 import threesum_algs as algo
 import time
 import sys
 sys.path.append("./Utils/")
+# Comments on below line are to remove error from linters
 import utils  # type: ignore # noqa: E402
-# Comments on above line are to remove error from linters
 
 
 def measure_threesum(algorithm, start, size, increment, plot=True):
