@@ -122,5 +122,50 @@ def partition_slow(lst):
     return pivot, left, right
 
 
-def quick_sort_optimized(lst):
-    return
+def quick_sort_median(lst):
+    if len(lst) <= 1:  # Base case
+        return lst
+    else:
+        # If list is larger than base case, get pivot and all values smaller
+        # in left and all values larger in right
+        pivot, left, right = partition_median(lst)
+        # Recursion step, keep using last value as pivot until
+        # the whole list has been sorted
+        sorted_left = quick_sort_median(left)
+        sorted_right = quick_sort_median(right)
+        return sorted_left + [pivot] + sorted_right
+
+
+def partition_median(lst):
+    # Identify indices for first, middle, and last elements
+    first_index = 0
+    mid_index = len(lst) // 2
+    last_index = len(lst) - 1
+
+    first_val = lst[first_index]
+    mid_val = lst[mid_index]
+    last_val = lst[last_index]
+    # We check which value lies between the other two
+    if (mid_val <= first_val <= last_val) or (last_val <=
+                                              first_val <= mid_val):
+        pivot_index = first_index
+    elif (first_val <= mid_val <= last_val) or (last_val <=
+                                                mid_val <= first_val):
+        pivot_index = mid_index
+    else:
+        pivot_index = last_index
+
+    pivot = lst[pivot_index]
+
+    left = []
+    right = []
+
+    # Loop through the entire list by index, matching your original style
+    for i in range(0, len(lst)):
+        # Important: Skip the pivot index itself so we don't duplicate it
+        if i != pivot_index:
+            if lst[i] <= pivot:
+                left.append(lst[i])
+            else:
+                right.append(lst[i])
+    return pivot, left, right

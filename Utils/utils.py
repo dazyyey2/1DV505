@@ -12,8 +12,12 @@ def lin_reg(x, y):
         sum_xy += x[i] * y[i]
         sum_xx += x[i] * x[i]
     # Calculate K and M with formula given from the assignment
-    k = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x)
-    m = (sum_xx * sum_y - sum_x * sum_xy) / (n * sum_xx - sum_x * sum_x)
+    # and prevent division by 0
+    if (n * sum_xx - sum_x * sum_x) != 0:
+        k = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x)
+        m = (sum_xx * sum_y - sum_x * sum_xy) / (n * sum_xx - sum_x * sum_x)
+    else:
+        return 0, 0
     return m, k
 
 
