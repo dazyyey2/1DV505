@@ -11,6 +11,21 @@ class Fraction:
                 self.denominator = denominator
         else:
             raise ValueError('Denominator in a fraction cannot be 0.')
+        # Simplify fraction
+        gcd = 1  # Start at 1 because every number can be divided by 1
+        k = 2
+        # Find greatest common divisor
+        # FAILED test_fraction.py::test_subtraction
+        # - AssertionError: Exp: -1/6, Got: -2/12
+        # Fixed with absolute values
+        while k <= abs(self.numerator) and k <= abs(self.denominator):
+            if self.numerator % k == 0 and self.denominator % k == 0:
+                gcd = k
+            k += 1
+        # Should be okay to do integer devision because we
+        # know the result won't be a float
+        self.numerator //= gcd
+        self.denominator //= gcd
 
     @property
     def numerator(self):
@@ -28,52 +43,35 @@ class Fraction:
     def denominator(self, denominator):
         self.__denominator = denominator
 
-    def simplified(self):
-        gcd = 1  # Start at 1 because every number can be divided by 1
-        k = 2
-        # Find greatest common divisor
-        # FAILED test_fraction.py::test_subtraction
-        # - AssertionError: Exp: -1/6, Got: -2/12
-        # Fixed with absolute values
-        while k <= abs(self.numerator) and k <= abs(self.denominator):
-            if self.numerator % k == 0 and self.denominator % k == 0:
-                gcd = k
-            k += 1
-        # Should be okay to do integer devision because we
-        # know the result won't be a float
-        new_numerator = self.numerator // gcd
-        new_denominator = self.denominator // gcd
-        return Fraction(new_numerator, new_denominator)
-
     # Addition
     def __add__(self, f2):
         if self.denominator == f2.denominator:
             return Fraction(self.numerator + f2.numerator,
-                            self.denominator).simplified()
+                            self.denominator)
         else:
             return Fraction((self.numerator * f2.denominator) +
                             (f2.numerator * self.denominator),
-                            (self.denominator * f2.denominator)).simplified()
+                            (self.denominator * f2.denominator))
 
     # Subtraction
     def __sub__(self, f2):
         if self.denominator == f2.denominator:
             return Fraction(self.numerator - f2.numerator,
-                            self.denominator).simplified()
+                            self.denominator)
         else:
             return Fraction((self.numerator * f2.denominator) -
                             (f2.numerator * self.denominator),
-                            (self.denominator * f2.denominator)).simplified()
+                            (self.denominator * f2.denominator))
 
     # Multiplication
     def __mul__(self, f2):
         return Fraction(self.numerator * f2.numerator,
-                        self.denominator * f2.denominator).simplified()
+                        self.denominator * f2.denominator)
 
     # Float division (flip f2 denominator and numerator)
     def __truediv__(self, f2):
         return Fraction(self.numerator * f2.denominator,
-                        self.denominator * f2.numerator).simplified()
+                        self.denominator * f2.numerator)
 
     def __str__(self):
         # FAILED test_fraction.py::test_subtraction

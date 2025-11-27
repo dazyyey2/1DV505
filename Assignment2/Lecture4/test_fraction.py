@@ -1,5 +1,5 @@
 import pytest
-from fractions import Fraction
+from my_fractions import Fraction
 
 
 def test_addition():
