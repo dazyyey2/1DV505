@@ -76,12 +76,14 @@ class Fraction:
         return f'{self.__numerator}/{self.__denominator}'
 
 
-f1 = Fraction(3, 4)
-f2 = Fraction(2, 5)
-print(f"f1: {f1}")
-print(f"f2: {f2}")
-print("\nCalculations:")
-print(f"f1 + f2 = {f1 + f2}")
-print(f"f1 - f2 = {f1 - f2}")
-print(f"f1 * f2 = {f1 * f2}")
-print(f"f1 / f2 = {f1 / f2}")
+# Prevent running program by importing
+if __name__ == '__main__':
+    f1 = Fraction(3, 4)
+    f2 = Fraction(2, 5)
+    print(f"f1: {f1}")
+    print(f"f2: {f2}")
+    print("\nCalculations:")
+    print(f"f1 + f2 = {f1 + f2}")
+    print(f"f1 - f2 = {f1 - f2}")
+    print(f"f1 * f2 = {f1 * f2}")
+    print(f"f1 / f2 = {f1 / f2}")
