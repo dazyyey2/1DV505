@@ -32,6 +32,9 @@ class Fraction:
         gcd = 1  # Start at 1 because every number can be divided by 1
         k = 2
         # Find greatest common divisor
+        # FAILED test_fraction.py::test_subtraction
+        # - AssertionError: Exp: -1/6, Got: -2/12
+        # Fixed with absolute values
         while k <= abs(self.numerator) and k <= abs(self.denominator):
             if self.numerator % k == 0 and self.denominator % k == 0:
                 gcd = k
