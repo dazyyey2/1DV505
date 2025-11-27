@@ -114,5 +114,5 @@ def test_div_by_zero():
         Fraction(2, 0)
     expected_message = 'Denominator in a fraction cannot be 0.'
     result_message = str(exc_info.value)
-    assert result_message == expected_message, 'Expected error message'
-    f'{expected_message}, but got {result_message}'
+    assert result_message == expected_message, 'Expected error message: '\
+        f'{expected_message}, but got: {result_message}'
