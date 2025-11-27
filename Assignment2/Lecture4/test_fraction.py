@@ -28,7 +28,7 @@ def test_addition():
 def test_subtraction():
     f1 = Fraction(1, 2)
     f2 = Fraction(2, 4)
-    expected = 0
+    expected = Fraction(0, 1)
     assert str(f1-f2) == str(expected), f'Exp: {str(expected)},Got: {
         str(f1-f2)}'
     f1 = Fraction(1, 3)
@@ -43,7 +43,7 @@ def test_subtraction():
         str(f1-f2)}'
     f1 = Fraction(100, 200)
     f2 = Fraction(200, 400)
-    expected = 0
+    expected = Fraction(0, 1)
     assert str(f1-f2) == str(expected), f'Exp: {str(expected)}, Got: {
         str(f1-f2)}'
     f1 = Fraction(300, 200)

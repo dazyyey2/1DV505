@@ -12,6 +12,12 @@ class Fraction:
         else:
             raise ValueError('Denominator in a fraction cannot be 0.')
         # Simplify fraction
+        # FAILED test_fraction.py::test_subtraction
+        # - AssertionError: Exp: 0/1,Got: 0/2
+        # Fixed with check for 0 numerator
+        if self.numerator == 0:
+            self.denominator = 1
+            return
         gcd = 1  # Start at 1 because every number can be divided by 1
         k = 2
         # Find greatest common divisor
@@ -76,10 +82,10 @@ class Fraction:
     def __str__(self):
         # FAILED test_fraction.py::test_subtraction
         # - AssertionError: Exp: 0,Got: 0/8
-        if self.numerator != 0:
-            return f'{self.numerator}/{self.denominator}'
-        else:
-            return '0'
+        # if self.numerator != 0:
+        return f'{self.numerator}/{self.denominator}'
+        # else:
+        #     return '0'
 
 
 # Prevent running program by importing
