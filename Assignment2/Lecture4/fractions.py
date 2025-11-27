@@ -4,11 +4,11 @@ class Fraction:
             if denominator < 0:
                 # If denominator is negative, flip so that
                 # numerator is negative instead
-                self.__numerator = numerator * -1
-                self.__denominator = denominator * -1
+                self.numerator = numerator * -1
+                self.denominator = denominator * -1
             else:
-                self.__numerator = numerator
-                self.__denominator = denominator
+                self.numerator = numerator
+                self.denominator = denominator
         else:
             raise ValueError('Denominator in a fraction cannot be 0.')
 
@@ -32,14 +32,14 @@ class Fraction:
         gcd = 1  # Start at 1 because every number can be divided by 1
         k = 2
         # Find greatest common divisor
-        while k <= self.__numerator and k <= self.__denominator:
-            if self.__numerator % k == 0 and self.__denominator % k == 0:
+        while k <= abs(self.numerator) and k <= abs(self.denominator):
+            if self.numerator % k == 0 and self.denominator % k == 0:
                 gcd = k
             k += 1
         # Should be okay to do integer devision because we
         # know the result won't be a float
-        new_numerator = self.__numerator // gcd
-        new_denominator = self.__denominator // gcd
+        new_numerator = self.numerator // gcd
+        new_denominator = self.denominator // gcd
         return Fraction(new_numerator, new_denominator)
 
     # Addition
@@ -67,13 +67,18 @@ class Fraction:
         return Fraction(self.numerator * f2.numerator,
                         self.denominator * f2.denominator).simplified()
 
-    # Float division
+    # Float division (flip f2 denominator and numerator)
     def __truediv__(self, f2):
         return Fraction(self.numerator * f2.denominator,
                         self.denominator * f2.numerator).simplified()
 
     def __str__(self):
-        return f'{self.__numerator}/{self.__denominator}'
+        # FAILED test_fraction.py::test_subtraction
+        # - AssertionError: Exp: 0,Got: 0/8
+        if self.numerator != 0:
+            return f'{self.numerator}/{self.denominator}'
+        else:
+            return '0'
 
 
 # Prevent running program by importing

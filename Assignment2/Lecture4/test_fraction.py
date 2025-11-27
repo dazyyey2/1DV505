@@ -23,4 +23,87 @@ def test_addition():
     expected = Fraction(1, 1)
     assert str(f1+f2) == str(expected), f'Exp: {str(expected)}, Got: {
         str(f1+f2)}'
-    return
+
+
+def test_subtraction():
+    f1 = Fraction(1, 2)
+    f2 = Fraction(2, 4)
+    expected = 0
+    assert str(f1-f2) == str(expected), f'Exp: {str(expected)},Got: {
+        str(f1-f2)}'
+    f1 = Fraction(1, 3)
+    f2 = Fraction(2, 4)
+    expected = Fraction(-1, 6)
+    assert str(f1-f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1-f2)}'
+    f1 = Fraction(1, 8)
+    f2 = Fraction(2, 8)
+    expected = Fraction(-1, 8)
+    assert str(f1-f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1-f2)}'
+    f1 = Fraction(100, 200)
+    f2 = Fraction(200, 400)
+    expected = 0
+    assert str(f1-f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1-f2)}'
+    f1 = Fraction(300, 200)
+    f2 = Fraction(200, 400)
+    expected = Fraction(1, 1)
+    assert str(f1-f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1-f2)}'
+
+
+def test_multiplication():
+    f1 = Fraction(1, 2)
+    f2 = Fraction(2, 4)
+    expected = Fraction(1, 4)
+    assert str(f1*f2) == str(expected), f'Exp: {str(expected)},Got: {
+        str(f1*f2)}'
+    f1 = Fraction(1, 3)
+    f2 = Fraction(2, 4)
+    expected = Fraction(1, 6)
+    assert str(f1*f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1*f2)}'
+    f1 = Fraction(1, 8)
+    f2 = Fraction(2, 8)
+    expected = Fraction(1, 32)
+    assert str(f1*f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1*f2)}'
+    f1 = Fraction(100, 200)
+    f2 = Fraction(200, 400)
+    expected = Fraction(1, 4)
+    assert str(f1*f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1*f2)}'
+    f1 = Fraction(300, 200)
+    f2 = Fraction(200, 400)
+    expected = Fraction(3, 4)
+    assert str(f1*f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1*f2)}'
+
+
+def test_division():
+    f1 = Fraction(1, 2)
+    f2 = Fraction(2, 4)
+    expected = Fraction(1, 1)
+    assert str(f1/f2) == str(expected), f'Exp: {str(expected)},Got: {
+        str(f1/f2)}'
+    f1 = Fraction(1, 3)
+    f2 = Fraction(2, 4)
+    expected = Fraction(2, 3)
+    assert str(f1/f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1/f2)}'
+    f1 = Fraction(1, 8)
+    f2 = Fraction(2, 8)
+    expected = Fraction(1, 2)
+    assert str(f1/f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1/f2)}'
+    f1 = Fraction(100, 200)
+    f2 = Fraction(200, 400)
+    expected = Fraction(1, 1)
+    assert str(f1/f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1/f2)}'
+    f1 = Fraction(300, 200)
+    f2 = Fraction(200, 400)
+    expected = Fraction(3, 1)
+    assert str(f1/f2) == str(expected), f'Exp: {str(expected)}, Got: {
+        str(f1/f2)}'
