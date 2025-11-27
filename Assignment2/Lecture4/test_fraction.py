@@ -107,3 +107,12 @@ def test_division():
     expected = Fraction(3, 1)
     assert str(f1/f2) == str(expected), f'Exp: {str(expected)}, Got: {
         str(f1/f2)}'
+
+
+def test_div_by_zero():
+    with pytest.raises(ValueError) as exc_info:
+        Fraction(2, 0)
+    expected_message = 'Denominator in a fraction cannot be 0.'
+    result_message = str(exc_info.value)
+    assert result_message == expected_message, 'Expected error message'
+    f'{expected_message}, but got {result_message}'
