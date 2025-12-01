@@ -45,6 +45,14 @@ class Deque:
     # Returns (without removing) the last entry in the deque.
     # Raises IndexError when accessing empty deque.
     def get_last(self):
+        node = self.head
+        if node is None:
+            raise IndexError('deque is empty.')
+        while node is not None:
+            if node.nxt is None:
+                return node
+            else:
+                node = node.nxt
         pass
 
     # Returns (without removing) the first entry in the deque
