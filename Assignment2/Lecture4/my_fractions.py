@@ -88,7 +88,7 @@ class Fraction:
         #     return '0'
 
 
-# Prevent running program by importing
+# Prevent running program from importing
 if __name__ == '__main__':
     f1 = Fraction(3, 4)
     f2 = Fraction(2, 5)
