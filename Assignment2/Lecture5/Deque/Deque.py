@@ -40,40 +40,83 @@ class Deque:
 
     # Add element n as first entry in deque
     def add_first(self, n):
-        pass
+        new = Node(n, None)
+        if self.head is None:
+            self.head = new
+            self.tail = new
+        else:
+            new.nxt = self.head
+            self.head = new
+        self.size += 1
 
     # Returns (without removing) the last entry in the deque.
     # Raises IndexError when accessing empty deque.
     def get_last(self):
-        node = self.head
-        if node is None:
-            raise IndexError('deque is empty.')
-        while node is not None:
-            if node.nxt is None:
-                return node
-            else:
-                node = node.nxt
-        pass
+        if self.tail is None:
+            raise IndexError('You can\'t access an empty queue.')
+        else:
+            return self.tail.value
 
     # Returns (without removing) the first entry in the deque
     # Raises IndexError when accessing empty deque.
     def get_first(self):
-        pass
+        if self.tail is None:
+            raise IndexError('You can\'t access an empty queue.')
+        else:
+            return self.head.value
 
     # Removes and returns the first entry in the deque.
     # Raises IndexError when accessing empty deque.
     # The case size = 1 requires speciall handling
     def remove_first(self):
-        pass
+        if self.tail is None:
+            raise IndexError('You can\'t access an empty queue.')
+        else:
+            val = self.head.value
+            self.head = self.head.nxt
+            self.size -= 1
+            if self.size == 0:
+                self.head = None
+                self.tail = None
+            return val
 
     # Removes and returns the last entry in the deque.
     # Raises IndexError when accessing empty deque.
     # The case size = 1 requires speciall handling
     def remove_last(self):
-        pass
+        if self.tail is None:
+            raise IndexError('You can\'t access an empty queue.')
+        elif self.size == 1:
+            val = self.tail.value
+            self.head = None
+            self.tail = None
+            self.size = 0
+            return val
+        else:
+            current = self.head
+            while current.nxt != self.tail:
+                current = current.nxt  # Find node before tail
+            val = self.tail.value
+            self.tail = current
+            self.tail.nxt = None
+            self.size -= 1
+            return val
 
     # Returns an iterator over the deque
     # allowing for simple iteration over all elements
     # Part of Lecture 6
     def __iter__(self):
-        pass
+        return LinkIter(self.head)
+
+
+class LinkIter:
+    def __init__(self, head):
+        self.next = head
+
+    def __next__(self):
+        if self.next is None:
+            raise StopIteration
+        else:
+            val = self.next.value
+            self.next = self.next.nxt
+            return val
