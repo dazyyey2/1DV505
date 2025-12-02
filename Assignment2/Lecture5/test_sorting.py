@@ -1,14 +1,13 @@
-import sys
-sys.path.append("./Utils/")
-import utils  # type: ignore # noqa: E402
-# I did not need any function of pytest for this assignment
+import random
 
 
-# Test with random list of size 50 with width -50000 to 50000
+# Test with list of size 1000 and width -5k to 5k
 def random_list_test(algorithm):
-    unsorted_lst = utils.random_list(50, 1000)
-    sorted_lst = algorithm(unsorted_lst)
+    unsorted_lst = []
+    for _ in range(1000):
+        unsorted_lst.append(random.randint(-5000, 5000))
     expected = sorted(unsorted_lst)
+    sorted_lst = algorithm(unsorted_lst)
     assert sorted_lst == expected, f'Exp: {str(expected)}, Got: {
         f'{str(sorted_lst)} from {algorithm}'}'
 
